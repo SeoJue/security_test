@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 페이지</title>
+</head>
+<body>
+<h1>로그인 페이지</h1>
+<hr/>
+<form action="/login" method="POST">
+    <input type="text" name="username" placeholder="Username"/><br/>
+    <input type="password" name="password" placeholder="Password"/><br/>
+    <button>로그인</button>
+</form>
+<a href="/joinForm">
+    <button>회원가입</button>
+</a>
+<br/>
+<a href="/oauth2/authorization/google">
+    <button>구글 로그인</button>
+</a> <!-- oauth 인증을 요청해야 하는 resource server 주소, 이는 oauth에서 저장하는 symbolic link 같은 것으로 실제 주소는 다름 -->
+
+<a href="/oauth2/authorization/naver">
+    <button>네이버 로그인</button>
+</a>
+
+</body>
+</html>
