@@ -2,6 +2,7 @@ package com.example.security1.config.oauth;
 
 import com.example.security1.config.auth.PrincipalDetails;
 import com.example.security1.config.oauth.provider.GoogleUserInfo;
+import com.example.security1.config.oauth.provider.KakaoUserInfo;
 import com.example.security1.config.oauth.provider.NaverUserInfo;
 import com.example.security1.config.oauth.provider.Oauth2UserInfo;
 import com.example.security1.model.User;
@@ -21,7 +22,7 @@ import java.util.Map;
 // 1.코드받기(인증), 2.엑세스 토큰(권한), 3.사용자 프로필 정보를 가져옴
 // 4-1.그 정보를 토대로 회원가입, 4-2.client 서비스가 필요한 추가정보를 요구 후 회원가입 <- 이 부분을 담당
 @Service
-public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
+public class PrincipalOauth2UserService extends  DefaultOAuth2UserService{
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -65,8 +66,12 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         }else if(userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
             System.out.println("naver login");
             oauth2UserInfo = new NaverUserInfo((Map)oAuth2User.getAttributes().get("response"));
-        }else{
-            System.out.println("we support google and naver");
+        }else if(userRequest.getClientRegistration().getRegistrationId().equals("kakao")){
+            System.out.println("kakao login");
+            oauth2UserInfo = new KakaoUserInfo(oAuth2User.getAttributes());
+        }
+        else{
+            System.out.println("we support google, naver and kakao");
         }
 
         String provider = oauth2UserInfo.getProvider();
